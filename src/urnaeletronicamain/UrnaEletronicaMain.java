@@ -511,38 +511,81 @@ public class UrnaEletronicaMain {
     // ===== RELATÓRIO TXT/CSV =====
 
     private String gerarStringRelatorioTexto() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("RESULTADO DA VOTAÇÃO\n");
-        sb.append("================================\n\n");
+    StringBuilder sb = new StringBuilder();
+    sb.append("RESULTADO DA VOTAÇÃO\n");
+    sb.append("================================\n\n");
 
-        for (Cargo cargo : cargos) {
-            sb.append("== ").append(cargo.nome).append(" ==\n");
-            for (Candidato c : cargo.candidatos.values()) {
-                sb.append(String.format("Nº %s - %-20s  Partido: %-10s  Votos: %d%n",
-                        c.numero, c.nome, c.partido, c.votos));
-            }
-            sb.append(String.format("BRANCOS: %d   NULOS: %d%n",
-                    cargo.votosBranco, cargo.votosNulo));
-            sb.append("\n");
+    for (Cargo cargo : cargos) {
+        sb.append("== ").append(cargo.nome).append(" ==\n");
+
+        // Calcula totais
+        int totalValidos = 0;
+        for (Candidato c : cargo.candidatos.values()) {
+            totalValidos += c.votos;
         }
-        return sb.toString();
+        int totalBrancos = cargo.votosBranco;
+        int totalNulos   = cargo.votosNulo;
+        int totalGeral   = totalValidos + totalBrancos + totalNulos;
+
+        sb.append(String.format("Total de votos (cargo): %d%n", totalGeral));
+        sb.append(String.format("Válidos: %d   Brancos: %d   Nulos: %d%n%n",
+                totalValidos, totalBrancos, totalNulos));
+
+        // Lista candidatos com porcentagem
+        for (Candidato c : cargo.candidatos.values()) {
+            double perc = (totalGeral > 0) ? (c.votos * 100.0 / totalGeral) : 0.0;
+
+            sb.append(String.format(
+                    "Nº %s - %-20s  Partido: %-8s  Votos: %-4d (%.2f%%)%n",
+                    c.numero, c.nome, c.partido, c.votos, perc
+            ));
+        }
+
+        sb.append("\n");
     }
+    return sb.toString();
+}
 
     private String gerarStringRelatorioCSV() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Cargo;Numero;Nome;Partido;Votos;Tipo\n");
-        for (Cargo cargo : cargos) {
-            for (Candidato c : cargo.candidatos.values()) {
-                sb.append(String.format("%s;%s;%s;%s;%d;CANDIDATO%n",
-                        cargo.nome, c.numero, c.nome, c.partido, c.votos));
-            }
-            sb.append(String.format("%s;;BRANCOS;;%d;BRANCO%n",
-                    cargo.nome, cargo.votosBranco));
-            sb.append(String.format("%s;;NULOS;;%d;NULO%n",
-                    cargo.nome, cargo.votosNulo));
+    StringBuilder sb = new StringBuilder();
+    sb.append("Cargo;Numero;Nome;Partido;Votos;Percentual;Tipo\n");
+
+    for (Cargo cargo : cargos) {
+
+        int totalValidos = 0;
+        for (Candidato c : cargo.candidatos.values()) {
+            totalValidos += c.votos;
         }
-        return sb.toString();
+        int totalBrancos = cargo.votosBranco;
+        int totalNulos   = cargo.votosNulo;
+        int totalGeral   = totalValidos + totalBrancos + totalNulos;
+
+        // Candidatos
+        for (Candidato c : cargo.candidatos.values()) {
+            double perc = (totalGeral > 0) ? (c.votos * 100.0 / totalGeral) : 0.0;
+            sb.append(String.format(
+                    "%s;%s;%s;%s;%d;%.2f;CANDIDATO%n",
+                    cargo.nome, c.numero, c.nome, c.partido, c.votos, perc
+            ));
+        }
+
+        // Brancos e nulos
+        double percBrancos = (totalGeral > 0) ? (totalBrancos * 100.0 / totalGeral) : 0.0;
+        double percNulos   = (totalGeral > 0) ? (totalNulos   * 100.0 / totalGeral) : 0.0;
+
+        sb.append(String.format(
+                "%s;;BRANCOS;;%d;%.2f;BRANCO%n",
+                cargo.nome, totalBrancos, percBrancos
+        ));
+        sb.append(String.format(
+                "%s;;NULOS;;%d;%.2f;NULO%n",
+                cargo.nome, totalNulos, percNulos
+        ));
     }
+
+    return sb.toString();
+}
+
 
     private void salvarRelatoriosEmArquivo() {
         String texto = gerarStringRelatorioTexto();
@@ -577,22 +620,18 @@ public class UrnaEletronicaMain {
     // ===== SOM DE CONFIRMAÇÃO =====
 
     private void tocarSomConfirmacao() {
-        // Coloque um arquivo som_confirmacao.wav no classpath (ex.: src/)
-        // e ajuste o caminho abaixo se necessário.
-        try {
-            java.net.URL soundUrl = getClass().getResource("/som_confirmacao.wav");
-            if (soundUrl == null) {
-                System.err.println("Arquivo de som não encontrado: /som_confirmacao.wav");
-                return;
-            }
-            AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundUrl);
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioIn);
-            clip.start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    try {
+        java.net.URL soundUrl = getClass().getResource("/som_confirmacao.wav");
+        System.out.println("URL do som: " + soundUrl);
+
+        AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundUrl);
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioIn);
+        clip.start();
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+}
 
     // Handler dos botões
     public class BotaoHandler implements ActionListener {

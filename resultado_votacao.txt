@@ -1,0 +1,28 @@
+RESULTADO DA VOTAÇÃO
+================================
+
+== DEPUTADO ESTADUAL ==
+Nº 54321 - CARLOS SOUZA          Partido: PARTIDO F   Votos: 0
+Nº 12345 - ANA LIMA              Partido: PARTIDO E   Votos: 0
+BRANCOS: 0   NULOS: 1
+
+== DEPUTADO FEDERAL ==
+Nº 1010 - JOÃO PEREIRA          Partido: PARTIDO A   Votos: 0
+Nº 2020 - MARIA DE SOUSA        Partido: PARTIDO B   Votos: 0
+BRANCOS: 0   NULOS: 1
+
+== SENADOR ==
+Nº 111 - PAULO SILVA           Partido: PARTIDO C   Votos: 0
+Nº 222 - LUIZA MORAES          Partido: PARTIDO D   Votos: 0
+BRANCOS: 0   NULOS: 1
+
+== GOVERNADOR ==
+Nº 45 - FERNANDA COSTA        Partido: PARTIDO H   Votos: 0
+Nº 13 - RODRIGO ALMEIDA       Partido: PARTIDO G   Votos: 0
+BRANCOS: 0   NULOS: 1
+
+== PRESIDENTE ==
+Nº 20 - CICRANO OLIVEIRA      Partido: PARTIDO B   Votos: 0
+Nº 10 - FULANO DA SILVA       Partido: PARTIDO A   Votos: 0
+BRANCOS: 0   NULOS: 1
+
