@@ -5,6 +5,7 @@
 package urnaeletronicamain;
 
 
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -27,16 +28,14 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 
 public class UrnaEletronicaMain {
 
     // Componentes de tela
     JLabel cargoLabel, numeroLabel, nomeLabel, partidoLabel, mensagemLabel, digitosLabel;
-    JLabel fotoLabel; // NOVO: foto do candidato
+    JLabel fotoLabel;
     JButton[] botoesNumericos;
     JButton botaoBranco, botaoCorrige, botaoConfirma, botaoResultado;
-    JTextArea areaResultado;
 
     // Fontes
     Font fontTitulo, fontNormal, fontDigitos;
@@ -50,7 +49,7 @@ public class UrnaEletronicaMain {
         String numero;
         String nome;
         String partido;
-        String caminhoFoto; // NOVO: caminho para a foto
+        String caminhoFoto;
         int votos;
 
         public Candidato(String numero, String nome, String partido, String caminhoFoto) {
@@ -78,7 +77,6 @@ public class UrnaEletronicaMain {
     List<Cargo> cargos = new ArrayList<>();
     int cargoAtualIndex = 0;
 
-    // Handler
     BotaoHandler bHandler = new BotaoHandler();
 
     public static void main(String[] args) {
@@ -98,44 +96,70 @@ public class UrnaEletronicaMain {
         fontDigitos = new Font("Comic Sans MS", Font.BOLD, 32);
     }
 
+    // ==== 100 candidatos (20 por cargo) usando foto padrão ====
     private void criarCargosECandidatos() {
-        // ATENÇÃO: ajuste os caminhos das fotos conforme onde você colocar os arquivos
-        // Exemplo: colocar em src/fotos/... e usar "/fotos/nome_arquivo.png"
 
-        // Deputado Estadual (5 dígitos)
+        String caminhoFotoPadrao = "/fotos/candidato_default.png";
+
+        // Deputado Estadual (5 dígitos) - 20 candidatos: 10000..10019
         Cargo depEst = new Cargo("DEPUTADO ESTADUAL", 5);
-        depEst.candidatos.put("12345",
-                new Candidato("12345", "ANA LIMA", "PARTIDO E", "/fotos/ana_lima.png"));
-        depEst.candidatos.put("54321",
-                new Candidato("54321", "CARLOS SOUZA", "PARTIDO F", "/fotos/carlos_souza.png"));
+        for (int i = 0; i < 20; i++) {
+            String numero = String.format("%05d", 10000 + i);
+            String nome = "CAND ESTADUAL " + (i + 1);
+            String partido = "PE" + String.format("%02d", (i % 10) + 1);
+            depEst.candidatos.put(
+                    numero,
+                    new Candidato(numero, nome, partido, caminhoFotoPadrao)
+            );
+        }
 
-        // Deputado Federal (4 dígitos)
+        // Deputado Federal (4 dígitos) - 20 candidatos: 2000..2019
         Cargo depFed = new Cargo("DEPUTADO FEDERAL", 4);
-        depFed.candidatos.put("1010",
-                new Candidato("1010", "JOÃO PEREIRA", "PARTIDO A", "/fotos/joao_pereira.png"));
-        depFed.candidatos.put("2020",
-                new Candidato("2020", "MARIA DE SOUSA", "PARTIDO B", "/fotos/maria_de_sousa.png"));
+        for (int i = 0; i < 20; i++) {
+            String numero = String.format("%04d", 2000 + i);
+            String nome = "CAND FEDERAL " + (i + 1);
+            String partido = "PF" + String.format("%02d", (i % 10) + 1);
+            depFed.candidatos.put(
+                    numero,
+                    new Candidato(numero, nome, partido, caminhoFotoPadrao)
+            );
+        }
 
-        // Senador (3 dígitos)
+        // Senador (3 dígitos) - 20 candidatos: 300..319
         Cargo senador = new Cargo("SENADOR", 3);
-        senador.candidatos.put("111",
-                new Candidato("111", "PAULO SILVA", "PARTIDO C", "/fotos/paulo_silva.png"));
-        senador.candidatos.put("222",
-                new Candidato("222", "LUIZA MORAES", "PARTIDO D", "/fotos/luiza_moraes.png"));
+        for (int i = 0; i < 20; i++) {
+            String numero = String.format("%03d", 300 + i);
+            String nome = "CAND SENADOR " + (i + 1);
+            String partido = "PS" + String.format("%02d", (i % 10) + 1);
+            senador.candidatos.put(
+                    numero,
+                    new Candidato(numero, nome, partido, caminhoFotoPadrao)
+            );
+        }
 
-        // Governador (2 dígitos)
+        // Governador (2 dígitos) - 20 candidatos: 40..59
         Cargo governador = new Cargo("GOVERNADOR", 2);
-        governador.candidatos.put("13",
-                new Candidato("13", "RODRIGO ALMEIDA", "PARTIDO G", "/fotos/rodrigo_almeida.png"));
-        governador.candidatos.put("45",
-                new Candidato("45", "FERNANDA COSTA", "PARTIDO H", "/fotos/fernanda_costa.png"));
+        for (int i = 0; i < 20; i++) {
+            String numero = String.format("%02d", 40 + i);
+            String nome = "CAND GOVERNADOR " + (i + 1);
+            String partido = "PG" + String.format("%02d", (i % 10) + 1);
+            governador.candidatos.put(
+                    numero,
+                    new Candidato(numero, nome, partido, caminhoFotoPadrao)
+            );
+        }
 
-        // Presidente (2 dígitos)
+        // Presidente (2 dígitos) - 20 candidatos: 60..79
         Cargo presidente = new Cargo("PRESIDENTE", 2);
-        presidente.candidatos.put("10",
-                new Candidato("10", "FULANO DA SILVA", "PARTIDO A", "/fotos/fulano_silva.png"));
-        presidente.candidatos.put("20",
-                new Candidato("20", "CICRANO OLIVEIRA", "PARTIDO B", "/fotos/cicrano_oliveira.png"));
+        for (int i = 0; i < 20; i++) {
+            String numero = String.format("%02d", 60 + i);
+            String nome = "CAND PRESIDENTE " + (i + 1);
+            String partido = "PP" + String.format("%02d", (i % 10) + 1);
+            presidente.candidatos.put(
+                    numero,
+                    new Candidato(numero, nome, partido, caminhoFotoPadrao)
+            );
+        }
 
         cargos.add(depEst);
         cargos.add(depFed);
@@ -148,6 +172,7 @@ public class UrnaEletronicaMain {
         return cargos.get(cargoAtualIndex);
     }
 
+    // ==== INTERFACE GRÁFICA ====
     private void criarUI() {
         JFrame window = new JFrame("Urna Eletrônica - Simulação");
         window.setSize(900, 620);
@@ -156,21 +181,19 @@ public class UrnaEletronicaMain {
         window.setLayout(null);
         window.setResizable(false);
 
-        // Painel da "carcaça" da urna
         JPanel urnaPanel = new JPanel();
         urnaPanel.setBounds(20, 20, 840, 540);
-        urnaPanel.setBackground(new Color(200, 200, 200)); // corpo cinza
+        urnaPanel.setBackground(new Color(200, 200, 200));
         urnaPanel.setLayout(null);
         window.add(urnaPanel);
 
-        // Tela preta da urna (lado esquerdo)
+        // Tela
         JPanel telaPanel = new JPanel();
         telaPanel.setBounds(20, 20, 500, 260);
         telaPanel.setBackground(Color.black);
         telaPanel.setLayout(null);
         urnaPanel.add(telaPanel);
 
-        // Painel de informações (dentro da tela)
         JPanel infoPanel = new JPanel();
         infoPanel.setBounds(10, 10, 320, 150);
         infoPanel.setBackground(Color.black);
@@ -219,12 +242,12 @@ public class UrnaEletronicaMain {
         partidoLabel.setBounds(110, 110, 200, 25);
         infoPanel.add(partidoLabel);
 
-        // NOVO: foto do candidato (lado direito da tela)
+        // Foto do candidato
         fotoLabel = new JLabel();
         fotoLabel.setBounds(340, 20, 140, 140);
         telaPanel.add(fotoLabel);
 
-        // Mensagem (dentro da tela)
+        // Mensagem
         JPanel mensagemPanel = new JPanel();
         mensagemPanel.setBounds(10, 170, 480, 70);
         mensagemPanel.setBackground(Color.black);
@@ -237,7 +260,7 @@ public class UrnaEletronicaMain {
         mensagemLabel.setBounds(10, 10, 460, 50);
         mensagemPanel.add(mensagemLabel);
 
-        // Dígitos grandes (parte de baixo da tela)
+        // Dígitos grandes
         JPanel digitosPanel = new JPanel();
         digitosPanel.setBounds(20, 290, 200, 80);
         digitosPanel.setBackground(Color.black);
@@ -250,22 +273,7 @@ public class UrnaEletronicaMain {
         digitosLabel.setBounds(10, 10, 180, 60);
         digitosPanel.add(digitosLabel);
 
-        // Painel de resultado geral (abaixo da tela)
-        JPanel resultadoPanel = new JPanel();
-        resultadoPanel.setBounds(20, 380, 500, 140);
-        resultadoPanel.setBackground(new Color(40, 40, 40));
-        urnaPanel.add(resultadoPanel);
-
-        areaResultado = new JTextArea(6, 42);
-        areaResultado.setForeground(Color.white);
-        areaResultado.setBackground(new Color(20, 20, 20));
-        areaResultado.setFont(new Font("Monospaced", Font.PLAIN, 12));
-        areaResultado.setEditable(false);
-        areaResultado.setLineWrap(true);
-        areaResultado.setWrapStyleWord(true);
-        resultadoPanel.add(areaResultado);
-
-        // Teclado numérico (lado direito)
+        // Teclado numérico
         JPanel tecladoPanel = new JPanel();
         tecladoPanel.setBounds(560, 80, 240, 220);
         tecladoPanel.setBackground(new Color(60, 60, 60));
@@ -281,19 +289,13 @@ public class UrnaEletronicaMain {
             botoesNumericos[i].setBackground(new Color(220, 220, 220));
             botoesNumericos[i].addActionListener(bHandler);
             botoesNumericos[i].setActionCommand(String.valueOf(i));
-        }
-
-        // adiciona 1-9
-        for (int i = 1; i <= 9; i++) {
             tecladoPanel.add(botoesNumericos[i]);
         }
 
-        // botão vazio
         JButton vazio = new JButton("");
         vazio.setEnabled(false);
         tecladoPanel.add(vazio);
 
-        // botão 0
         botoesNumericos[0] = new JButton("0");
         botoesNumericos[0].setFont(fontNormal);
         botoesNumericos[0].setFocusPainted(false);
@@ -302,19 +304,17 @@ public class UrnaEletronicaMain {
         botoesNumericos[0].setActionCommand("0");
         tecladoPanel.add(botoesNumericos[0]);
 
-        // outro vazio
         JButton vazio2 = new JButton("");
         vazio2.setEnabled(false);
         tecladoPanel.add(vazio2);
 
-        // Painel dos botões de ação (lado direito embaixo)
+        // Botões de ação
         JPanel acoesPanel = new JPanel();
         acoesPanel.setBounds(560, 320, 240, 200);
         acoesPanel.setBackground(new Color(60, 60, 60));
         acoesPanel.setLayout(new GridLayout(2, 2, 10, 10));
         urnaPanel.add(acoesPanel);
 
-        // BRANCO (branco com texto preto)
         botaoBranco = new JButton("BRANCO");
         botaoBranco.setFont(fontNormal);
         botaoBranco.setFocusPainted(false);
@@ -324,31 +324,28 @@ public class UrnaEletronicaMain {
         botaoBranco.setActionCommand("BRANCO");
         acoesPanel.add(botaoBranco);
 
-        // CORRIGE (laranja)
         botaoCorrige = new JButton("CORRIGE");
         botaoCorrige.setFont(fontNormal);
         botaoCorrige.setFocusPainted(false);
-        botaoCorrige.setBackground(new Color(255, 153, 51)); // laranja TSE
+        botaoCorrige.setBackground(new Color(255, 153, 51));
         botaoCorrige.setForeground(Color.BLACK);
         botaoCorrige.addActionListener(bHandler);
         botaoCorrige.setActionCommand("CORRIGE");
         acoesPanel.add(botaoCorrige);
 
-        // CONFIRMA (verde)
         botaoConfirma = new JButton("CONFIRMA");
         botaoConfirma.setFont(fontNormal);
         botaoConfirma.setFocusPainted(false);
-        botaoConfirma.setBackground(new Color(0, 153, 0)); // verde TSE
+        botaoConfirma.setBackground(new Color(0, 153, 0));
         botaoConfirma.setForeground(Color.BLACK);
         botaoConfirma.addActionListener(bHandler);
         botaoConfirma.setActionCommand("CONFIRMA");
         acoesPanel.add(botaoConfirma);
 
-        // RESULTADO (azul)
         botaoResultado = new JButton("RESULTADO");
         botaoResultado.setFont(fontNormal);
         botaoResultado.setFocusPainted(false);
-        botaoResultado.setBackground(new Color(102, 178, 255)); // azul
+        botaoResultado.setBackground(new Color(102, 178, 255));
         botaoResultado.setForeground(Color.BLACK);
         botaoResultado.addActionListener(bHandler);
         botaoResultado.setActionCommand("RESULTADO");
@@ -362,7 +359,7 @@ public class UrnaEletronicaMain {
     private void atualizarCargoNaTela() {
         Cargo cargo = getCargoAtual();
         cargoLabel.setText("ELEIÇÃO - " + cargo.nome);
-        corrigir(); // limpa dígitos e mensagens para o novo cargo
+        corrigir(); // limpa tudo para o novo cargo
     }
 
     private void adicionarDigito(String d) {
@@ -418,7 +415,6 @@ public class UrnaEletronicaMain {
             return;
         }
         try {
-            // carrega do classpath (ex.: /fotos/arquivo.png)
             java.net.URL imgUrl = getClass().getResource(caminhoFoto);
             if (imgUrl != null) {
                 ImageIcon icon = new ImageIcon(imgUrl);
@@ -472,14 +468,11 @@ public class UrnaEletronicaMain {
                 mensagemLabel.setText("VOTO NULO COMPUTADO para " + cargoAtual.nome + ".");
             }
         } else {
-            // dígitos incompletos => nulo
             cargoAtual.votosNulo++;
             mensagemLabel.setText("Número incompleto. VOTO NULO COMPUTADO para " + cargoAtual.nome + ".");
         }
 
-        // TOCAR SOM DE CONFIRMAÇÃO
         tocarSomConfirmacao();
-
         avancarParaProximoCargo();
     }
 
@@ -490,10 +483,9 @@ public class UrnaEletronicaMain {
         cargoAtualIndex++;
 
         if (cargoAtualIndex >= cargos.size()) {
-            // terminou todos os cargos, volta para o primeiro (novo eleitor)
             cargoAtualIndex = 0;
             mensagemLabel.setText("FIM DA VOTAÇÃO. Iniciando NOVO ELEITOR para " +
-                                  getCargoAtual().nome + ".");
+                    getCargoAtual().nome + ".");
         }
 
         atualizarCargoNaTela();
@@ -511,127 +503,120 @@ public class UrnaEletronicaMain {
     // ===== RELATÓRIO TXT/CSV =====
 
     private String gerarStringRelatorioTexto() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("RESULTADO DA VOTAÇÃO\n");
-    sb.append("================================\n\n");
+        StringBuilder sb = new StringBuilder();
+        sb.append("RESULTADO DA VOTAÇÃO\n");
+        sb.append("================================\n\n");
 
-    for (Cargo cargo : cargos) {
-        sb.append("== ").append(cargo.nome).append(" ==\n");
+        for (Cargo cargo : cargos) {
+            sb.append("== ").append(cargo.nome).append(" ==\n");
 
-        // Calcula totais
-        int totalValidos = 0;
-        for (Candidato c : cargo.candidatos.values()) {
-            totalValidos += c.votos;
+            int totalValidos = 0;
+            for (Candidato c : cargo.candidatos.values()) {
+                totalValidos += c.votos;
+            }
+            int totalBrancos = cargo.votosBranco;
+            int totalNulos   = cargo.votosNulo;
+            int totalGeral   = totalValidos + totalBrancos + totalNulos;
+
+            sb.append(String.format("Total de votos (cargo): %d%n", totalGeral));
+            sb.append(String.format("Válidos: %d   Brancos: %d   Nulos: %d%n%n",
+                    totalValidos, totalBrancos, totalNulos));
+
+            for (Candidato c : cargo.candidatos.values()) {
+                double perc = (totalGeral > 0) ? (c.votos * 100.0 / totalGeral) : 0.0;
+
+                sb.append(String.format(
+                        "Nº %s - %-20s  Partido: %-8s  Votos: %-4d (%.2f%%)%n",
+                        c.numero, c.nome, c.partido, c.votos, perc
+                ));
+            }
+
+            sb.append("\n");
         }
-        int totalBrancos = cargo.votosBranco;
-        int totalNulos   = cargo.votosNulo;
-        int totalGeral   = totalValidos + totalBrancos + totalNulos;
-
-        sb.append(String.format("Total de votos (cargo): %d%n", totalGeral));
-        sb.append(String.format("Válidos: %d   Brancos: %d   Nulos: %d%n%n",
-                totalValidos, totalBrancos, totalNulos));
-
-        // Lista candidatos com porcentagem
-        for (Candidato c : cargo.candidatos.values()) {
-            double perc = (totalGeral > 0) ? (c.votos * 100.0 / totalGeral) : 0.0;
-
-            sb.append(String.format(
-                    "Nº %s - %-20s  Partido: %-8s  Votos: %-4d (%.2f%%)%n",
-                    c.numero, c.nome, c.partido, c.votos, perc
-            ));
-        }
-
-        sb.append("\n");
+        return sb.toString();
     }
-    return sb.toString();
-}
 
     private String gerarStringRelatorioCSV() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("Cargo;Numero;Nome;Partido;Votos;Percentual;Tipo\n");
+        StringBuilder sb = new StringBuilder();
+        sb.append("Cargo;Numero;Nome;Partido;Votos;Percentual;Tipo\n");
 
-    for (Cargo cargo : cargos) {
+        for (Cargo cargo : cargos) {
 
-        int totalValidos = 0;
-        for (Candidato c : cargo.candidatos.values()) {
-            totalValidos += c.votos;
-        }
-        int totalBrancos = cargo.votosBranco;
-        int totalNulos   = cargo.votosNulo;
-        int totalGeral   = totalValidos + totalBrancos + totalNulos;
+            int totalValidos = 0;
+            for (Candidato c : cargo.candidatos.values()) {
+                totalValidos += c.votos;
+            }
+            int totalBrancos = cargo.votosBranco;
+            int totalNulos   = cargo.votosNulo;
+            int totalGeral   = totalValidos + totalBrancos + totalNulos;
 
-        // Candidatos
-        for (Candidato c : cargo.candidatos.values()) {
-            double perc = (totalGeral > 0) ? (c.votos * 100.0 / totalGeral) : 0.0;
+            for (Candidato c : cargo.candidatos.values()) {
+                double perc = (totalGeral > 0) ? (c.votos * 100.0 / totalGeral) : 0.0;
+                sb.append(String.format(
+                        "%s;%s;%s;%s;%d;%.2f;CANDIDATO%n",
+                        cargo.nome, c.numero, c.nome, c.partido, c.votos, perc
+                ));
+            }
+
+            double percBrancos = (totalGeral > 0) ? (totalBrancos * 100.0 / totalGeral) : 0.0;
+            double percNulos   = (totalGeral > 0) ? (totalNulos   * 100.0 / totalGeral) : 0.0;
+
             sb.append(String.format(
-                    "%s;%s;%s;%s;%d;%.2f;CANDIDATO%n",
-                    cargo.nome, c.numero, c.nome, c.partido, c.votos, perc
+                    "%s;;BRANCOS;;%d;%.2f;BRANCO%n",
+                    cargo.nome, totalBrancos, percBrancos
+            ));
+            sb.append(String.format(
+                    "%s;;NULOS;;%d;%.2f;NULO%n",
+                    cargo.nome, totalNulos, percNulos
             ));
         }
 
-        // Brancos e nulos
-        double percBrancos = (totalGeral > 0) ? (totalBrancos * 100.0 / totalGeral) : 0.0;
-        double percNulos   = (totalGeral > 0) ? (totalNulos   * 100.0 / totalGeral) : 0.0;
-
-        sb.append(String.format(
-                "%s;;BRANCOS;;%d;%.2f;BRANCO%n",
-                cargo.nome, totalBrancos, percBrancos
-        ));
-        sb.append(String.format(
-                "%s;;NULOS;;%d;%.2f;NULO%n",
-                cargo.nome, totalNulos, percNulos
-        ));
+        return sb.toString();
     }
-
-    return sb.toString();
-}
-
 
     private void salvarRelatoriosEmArquivo() {
         String texto = gerarStringRelatorioTexto();
-        String csv = gerarStringRelatorioCSV();
+        String csv   = gerarStringRelatorioCSV();
 
-        // salva no diretório de trabalho, arquivos simples
         try (PrintWriter outTxt = new PrintWriter(new FileWriter("resultado_votacao.txt"))) {
             outTxt.print(texto);
         } catch (IOException e) {
             e.printStackTrace();
-            areaResultado.append("\nErro ao salvar TXT: " + e.getMessage());
         }
 
         try (PrintWriter outCsv = new PrintWriter(new FileWriter("resultado_votacao.csv"))) {
             outCsv.print(csv);
         } catch (IOException e) {
             e.printStackTrace();
-            areaResultado.append("\nErro ao salvar CSV: " + e.getMessage());
         }
 
         mensagemLabel.setText("Relatórios gerados: resultado_votacao.txt e resultado_votacao.csv");
     }
 
     private void mostrarResultadoGeral() {
-        String texto = gerarStringRelatorioTexto();
-        areaResultado.setText(texto);
-
-        // também grava em arquivos
         salvarRelatoriosEmArquivo();
     }
 
     // ===== SOM DE CONFIRMAÇÃO =====
 
     private void tocarSomConfirmacao() {
-    try {
-        java.net.URL soundUrl = getClass().getResource("/som_confirmacao.wav");
-        System.out.println("URL do som: " + soundUrl);
+        try {
+            java.net.URL soundUrl = getClass().getResource("/som_confirmacao.wav");
+            System.out.println("URL do som: " + soundUrl);
 
-        AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundUrl);
-        Clip clip = AudioSystem.getClip();
-        clip.open(audioIn);
-        clip.start();
-    } catch (Exception e) {
-        e.printStackTrace();
+            if (soundUrl == null) {
+                System.err.println("Arquivo de som não encontrado no classpath.");
+                return;
+            }
+
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundUrl);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioIn);
+            clip.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-}
 
     // Handler dos botões
     public class BotaoHandler implements ActionListener {
@@ -640,16 +625,8 @@ public class UrnaEletronicaMain {
             String acao = e.getActionCommand();
 
             switch (acao) {
-                case "0":
-                case "1":
-                case "2":
-                case "3":
-                case "4":
-                case "5":
-                case "6":
-                case "7":
-                case "8":
-                case "9":
+                case "0": case "1": case "2": case "3": case "4":
+                case "5": case "6": case "7": case "8": case "9":
                     adicionarDigito(acao);
                     break;
                 case "BRANCO":

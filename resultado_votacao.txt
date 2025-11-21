@@ -2,27 +2,37 @@ RESULTADO DA VOTAÇÃO
 ================================
 
 == DEPUTADO ESTADUAL ==
-Nº 54321 - CARLOS SOUZA          Partido: PARTIDO F   Votos: 0
-Nº 12345 - ANA LIMA              Partido: PARTIDO E   Votos: 0
-BRANCOS: 0   NULOS: 1
+Total de votos (cargo): 1
+Válidos: 0   Brancos: 0   Nulos: 1
+
+Nº 54321 - CARLOS SOUZA          Partido: PARTIDO F  Votos: 0    (0,00%)
+Nº 12345 - ANA LIMA              Partido: PARTIDO E  Votos: 0    (0,00%)
 
 == DEPUTADO FEDERAL ==
-Nº 1010 - JOÃO PEREIRA          Partido: PARTIDO A   Votos: 0
-Nº 2020 - MARIA DE SOUSA        Partido: PARTIDO B   Votos: 0
-BRANCOS: 0   NULOS: 1
+Total de votos (cargo): 1
+Válidos: 0   Brancos: 0   Nulos: 1
+
+Nº 1010 - JOÃO PEREIRA          Partido: PARTIDO A  Votos: 0    (0,00%)
+Nº 2020 - MARIA DE SOUSA        Partido: PARTIDO B  Votos: 0    (0,00%)
 
 == SENADOR ==
-Nº 111 - PAULO SILVA           Partido: PARTIDO C   Votos: 0
-Nº 222 - LUIZA MORAES          Partido: PARTIDO D   Votos: 0
-BRANCOS: 0   NULOS: 1
+Total de votos (cargo): 1
+Válidos: 0   Brancos: 0   Nulos: 1
+
+Nº 111 - PAULO SILVA           Partido: PARTIDO C  Votos: 0    (0,00%)
+Nº 222 - LUIZA MORAES          Partido: PARTIDO D  Votos: 0    (0,00%)
 
 == GOVERNADOR ==
-Nº 45 - FERNANDA COSTA        Partido: PARTIDO H   Votos: 0
-Nº 13 - RODRIGO ALMEIDA       Partido: PARTIDO G   Votos: 0
-BRANCOS: 0   NULOS: 1
+Total de votos (cargo): 1
+Válidos: 0   Brancos: 0   Nulos: 1
+
+Nº 45 - FERNANDA COSTA        Partido: PARTIDO H  Votos: 0    (0,00%)
+Nº 13 - RODRIGO ALMEIDA       Partido: PARTIDO G  Votos: 0    (0,00%)
 
 == PRESIDENTE ==
-Nº 20 - CICRANO OLIVEIRA      Partido: PARTIDO B   Votos: 0
-Nº 10 - FULANO DA SILVA       Partido: PARTIDO A   Votos: 0
-BRANCOS: 0   NULOS: 1
+Total de votos (cargo): 1
+Válidos: 0   Brancos: 0   Nulos: 1
+
+Nº 20 - CICRANO OLIVEIRA      Partido: PARTIDO B  Votos: 0    (0,00%)
+Nº 10 - FULANO DA SILVA       Partido: PARTIDO A  Votos: 0    (0,00%)
 
