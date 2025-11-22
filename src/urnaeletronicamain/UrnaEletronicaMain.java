@@ -80,8 +80,19 @@ public class UrnaEletronicaMain {
     BotaoHandler bHandler = new BotaoHandler();
 
     public static void main(String[] args) {
+    try {
         new UrnaEletronicaMain();
+    } catch (Throwable t) {
+        // Mostra o stack trace no console (se estiver rodando pelo java -jar)
+        t.printStackTrace();
+        // Também grava o erro em arquivo de texto, no mesmo diretório do .jar
+        try (PrintWriter pw = new PrintWriter(new FileWriter("erro_urna.txt"))) {
+            t.printStackTrace(pw);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+}
 
     public UrnaEletronicaMain() {
         criarFontes();

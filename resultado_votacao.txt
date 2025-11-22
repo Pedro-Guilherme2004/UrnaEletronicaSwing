@@ -2,8 +2,8 @@ RESULTADO DA VOTAÇÃO
 ================================
 
 == DEPUTADO ESTADUAL ==
-Total de votos (cargo): 1
-Válidos: 0   Brancos: 0   Nulos: 1
+Total de votos (cargo): 2
+Válidos: 0   Brancos: 0   Nulos: 2
 
 Nº 10008 - CAND ESTADUAL 9       Partido: PE09      Votos: 0    (0,00%)
 Nº 10019 - CAND ESTADUAL 20      Partido: PE10      Votos: 0    (0,00%)
@@ -27,8 +27,8 @@ Nº 10005 - CAND ESTADUAL 6       Partido: PE06      Votos: 0    (0,00%)
 Nº 10016 - CAND ESTADUAL 17      Partido: PE07      Votos: 0    (0,00%)
 
 == DEPUTADO FEDERAL ==
-Total de votos (cargo): 1
-Válidos: 0   Brancos: 0   Nulos: 1
+Total de votos (cargo): 2
+Válidos: 0   Brancos: 0   Nulos: 2
 
 Nº 2001 - CAND FEDERAL 2        Partido: PF02      Votos: 0    (0,00%)
 Nº 2012 - CAND FEDERAL 13       Partido: PF03      Votos: 0    (0,00%)
@@ -78,10 +78,10 @@ Nº 309 - CAND SENADOR 10       Partido: PS10      Votos: 0    (0,00%)
 
 == GOVERNADOR ==
 Total de votos (cargo): 1
-Válidos: 0   Brancos: 0   Nulos: 1
+Válidos: 1   Brancos: 0   Nulos: 0
 
 Nº 44 - CAND GOVERNADOR 5     Partido: PG05      Votos: 0    (0,00%)
-Nº 55 - CAND GOVERNADOR 16    Partido: PG06      Votos: 0    (0,00%)
+Nº 55 - CAND GOVERNADOR 16    Partido: PG06      Votos: 1    (100,00%)
 Nº 45 - CAND GOVERNADOR 6     Partido: PG06      Votos: 0    (0,00%)
 Nº 56 - CAND GOVERNADOR 17    Partido: PG07      Votos: 0    (0,00%)
 Nº 46 - CAND GOVERNADOR 7     Partido: PG07      Votos: 0    (0,00%)
